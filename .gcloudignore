@@ -1,0 +1,42 @@
+# Ignore large legacy data
+wp-data/
+portal/
+CW knjiga standarda/
+temp_backup/
+
+# Ignore dependencies (will be installed during build)
+**/node_modules
+**/node_modules/**
+**/.next
+**/.next/**
+
+# Ignore Strapi public uploads (not needed for UI build)
+cbs-portal-strapi-be/public/**
+# Ignore HubSpot exporter (separate deploy)
+hubspot-cbs-deal-exporter/**
+# Ignore terraform state
+terraform/.terraform/**
+terraform/*.tfstate*
+
+# Ignore git and IDE
+.git/
+.gitignore
+.vscode/
+
+# Ignore env files (secrets are in Secret Manager)
+**/.env
+**/.env.local
+**/.env.production
+
+# Ignore docs
+**/docs/
+
+# Ignore docker-compose and local dev files
+docker-compose.yml
+**/docker-compose*.yml
+
+# Ignore misc
+*.md
+temp_members.json
+update_html.js
+cors-uat.json

@@ -1,0 +1,35 @@
+services:
+  strapi:
+    build:
+      context: ./cbs-portal-strapi-be
+      dockerfile: Dockerfile
+    container_name: cbs_strapi
+    ports:
+      - "1337:1337"
+    env_file:
+      - ./cbs-portal-strapi-be/.env
+    environment:
+      NODE_ENV: production
+      # Local GCS override for testing
+      GCS_BUCKET_NAME: "test-bucket"
+    volumes:
+      - ./cbs-portal-strapi-be/database:/opt/app/database
+      - ./cbs-portal-strapi-be/.tmp:/opt/app/.tmp
+
+  ui:
+    build:
+      context: ./cbs-portal-ui
+      dockerfile: Dockerfile
+    container_name: cbs_ui
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./cbs-portal-ui/.env.local
+    environment:
+      NODE_ENV: production
+      # Next.js Server Side Rendering calls need the internal Docker network name
+      # Note: Browser-side calls might fail unless you map 'strapi' in your host file, 
+      # but this is enough to verify if the containers build and boot successfully.
+      NEXT_PUBLIC_STRAPI_API_URL: http://strapi:1337
+    depends_on:
+      - strapi

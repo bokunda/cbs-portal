@@ -1,0 +1,33 @@
+# Sub-repos (have their own .git — do NOT track here)
+cbs-portal-ui/
+cbs-portal-strapi-be/
+terraform/
+hubspot-cbs-deal-exporter/
+
+# Large data & legacy
+wp-data/
+portal/
+CW knjiga standarda/
+temp_backup/
+
+# Temp & obsolete scripts
+temp_members.json
+update_html.js
+
+# Large binary files
+*.pdf
+
+# Secrets & env
+.env
+.env.local
+**/credentials*
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

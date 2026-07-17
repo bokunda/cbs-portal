@@ -1,0 +1,45 @@
+steps:
+  # Build the HubSpot exporter image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cbs-portal-uat/hubspot:$SHORT_SHA'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cbs-portal-uat/hubspot:latest'
+      - '-f'
+      - 'hubspot-cbs-deal-exporter/Dockerfile'
+      - 'hubspot-cbs-deal-exporter/'
+
+  # Push to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cbs-portal-uat/hubspot:latest'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'cbs-hubspot-uat'
+      - '--image=europe-west1-docker.pkg.dev/$PROJECT_ID/cbs-portal-uat/hubspot:latest'
+      - '--region=europe-west1'
+      - '--platform=managed'
+      - '--port=3000'
+      - '--cpu=1'
+      - '--memory=1Gi'
+      - '--min-instances=1'
+      - '--max-instances=2'
+      - '--concurrency=80'
+      - '--timeout=120'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=NODE_ENV=production,STRAPI_URL=https://cbs-strapi-uat-147527109622.europe-west1.run.app,MAP_PROVIDER=google,PUBLIC_URL=https://cbs-hubspot-uat-147527109622.europe-west1.run.app,AUTH_REQUIRED=false,ALLOWED_ORIGINS=https://cbs-ui-uat-147527109622.europe-west1.run.app,IMPORT_CRON_SCHEDULE=0 6,18 * * *,PROPERTIES_PER_CATEGORY=10'
+      - '--set-secrets=HUBSPOT_ACCESS_TOKEN=hubspot-access-token:latest,GOOGLE_MAPS_API_KEY=google-maps-api-key:latest,STRAPI_API_TOKEN=strapi-api-token:latest,MAPBOX_ACCESS_TOKEN=mapbox-access-token:latest'
+
+images:
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/cbs-portal-uat/hubspot:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
