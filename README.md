@@ -16,6 +16,15 @@ portal/
 └── CW knjiga standarda/    # Design standard book (PDF references)
 ```
 
+## 🌐 UAT Environment
+
+| Service | URL | CI/CD |
+|---------|-----|:-----:|
+| **Frontend** | [cbs-ui-uat-147527109622.europe-west1.run.app](https://cbs-ui-uat-147527109622.europe-west1.run.app) | ✅ |
+| **Strapi CMS** | [cbs-strapi-uat-147527109622.europe-west1.run.app](https://cbs-strapi-uat-147527109622.europe-west1.run.app) | ✅ |
+| **Strapi Admin** | [cbs-strapi-uat-147527109622.europe-west1.run.app/admin](https://cbs-strapi-uat-147527109622.europe-west1.run.app/admin) | — |
+| **HubSpot Export** | [cbs-hubspot-uat-147527109622.europe-west1.run.app](https://cbs-hubspot-uat-147527109622.europe-west1.run.app) | ✅ |
+
 ## Quick Start
 
 ### Prerequisites
@@ -46,20 +55,7 @@ npm install
 node index.js all-pubs      # runs full migration pipeline
 ```
 
-## Deployment (GCP UAT)
-
-| Service | URL | CI/CD |
-|---------|-----|:-----:|
-| Strapi CMS | https://cbs-strapi-uat-147527109622.europe-west1.run.app | ✅ Auto |
-| Next.js UI | https://cbs-ui-uat-147527109622.europe-west1.run.app | ✅ Auto |
-| HubSpot Export | https://cbs-hubspot-uat-147527109622.europe-west1.run.app | ✅ Auto |
-
-**CI/CD**: GitHub Actions + OIDC → push na `main` = auto-deploy.  
-See [`terraform/docs/CI-CD.md`](terraform/docs/CI-CD.md) for details.
-
-> **🔒 UAT Gate Protection**: The UAT site is password-protected by default (`GATE_ENABLED=true`).  
-> Login at the `/gate` page. To make it public, set `GATE_ENABLED=false` in Cloud Run.  
-> See `cbs-portal-ui/docs/confluence_04_deployment_and_operations.md` §4.
+> **🔒 UAT Gate Protection**: The UAT site is password-protected by default (`GATE_ENABLED=true`). Login at `/gate`.
 
 ## Documentation Index
 
