@@ -41,7 +41,7 @@ This file is readable by anyone with SSH access to the server.
 
 **Actions:**
 - [ ] Consider Docker secrets instead of `.env` file
-- [ ] Set `chmod 600` on `.env` file after creation
+- [x] Set `chmod 600` on `.env` file after creation ✅ (2026-07-18)
 - [ ] Minimize number of users with SSH access
 - [ ] Consider migrating from Hetzner to GCP Cloud Run (already done for `deploy-gcp.yml`)
 
@@ -64,18 +64,13 @@ The folder contains:
 
 ---
 
-## 4. Increase PITR backup retention to 14 days
+## 4. Increase PITR backup retention to 14 days ✅ DONE (2026-07-18)
 
 **File:** `terraform/cloudsql.tf`
 **Severity:** 🟡 Low
 
-Current: `transaction_log_retention_days = 7`
-
-For production readiness, point-in-time recovery should be extended to 14 days. The cost increase is minimal (~$0.10/month for a 10 GB instance).
-
-**Actions:**
-- [ ] Change `transaction_log_retention_days` from 7 to 14 in `cloudsql.tf`
-- [ ] Change `backup_retention_settings.retained_backups` from 7 to 14
+Changed `transaction_log_retention_days` and `retained_backups` from 7 to 14.
+Added `mapbox-access-token` data source to `secretmanager.tf`.
 
 ---
 
