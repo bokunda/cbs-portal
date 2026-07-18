@@ -1,8 +1,9 @@
 # 🔍 CBS Portal — Arhitektonska Analiza i Preporuke
 
-**Datum:** 13.07.2026.
-**Autor:** Sistem Arhitekta (AI)
-**Status:** Sveobuhvatni izveštaj
+**Datum:** 13.07.2026. (original) / **Ažurirano:** 18.07.2026.
+**Status:** Većina kritičnih nalaza rešena. Videti `SECURITY_TODO.md` za preostale stavke.
+
+> ⚡ **Update 18.07.2026:** Bezbednosni propusti (OIDC, Cloud SQL public IP, auth), SEO (CSP/HSTS/COOP, link text), i performanse (AVIF/WebP, legacy JS, image sizes, preconnect cleanup) su rešeni kroz 25+ commit-ova. Detaljan izveštaj u poslednjem bezbednosnom skenu.
 
 ---
 
