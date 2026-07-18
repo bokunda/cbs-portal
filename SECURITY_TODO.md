@@ -4,30 +4,19 @@ Date: 2026-07-18
 
 ---
 
-## 1. `.env` file with real credentials on development machine
+## 1. `.env` file with real credentials ✅ DONE (2026-07-18)
 
-**File:** `hubspot-cbs-deal-exporter/.env`
-**Severity:** 🔴 Critical
+File deleted. All tokens rotated:
+- HubSpot Private App token regenerated
+- Strapi API token regenerated (separate tokens: full-CRUD for Cloud Run, read-only for local dev)
+- Google Maps API key regenerated with HTTP referrer restrictions
+- Mapbox token regenerated
 
-Although `.env` is in `.gitignore`, the file exists on the filesystem with real production secrets:
-- `HUBSPOT_ACCESS_TOKEN`
-- `GOOGLE_MAPS_API_KEY`
-- `MAPBOX_ACCESS_TOKEN`
-- `STRAPI_API_TOKEN`
-
-**Actions:**
-- [ ] Delete `.env` with real values from the development machine
-- [ ] Use `.env.example` as a template for new development machines
-- [ ] Verify all tokens have been rotated (if the file was ever committed or backed up)
-- [ ] Rotate HubSpot access token (HubSpot Settings → Private Apps)
-- [ ] Rotate Strapi API token (Strapi Admin → Settings → API Tokens)
-- [ ] Regenerate Google Maps API key with restrictions (GCP Console → APIs & Services → Credentials)
+For local development: copy `.env.example` → `.env` and fill with dev-only tokens.
 
 ---
 
-## 2. Plain-text `.env` on Hetzner server
-
-**Severity:** 🟠 High
+## 2. Plain-text `.env` on Hetzner server ✅ PARTIALLY DONE
 
 The CI/CD pipeline (`deploy.yml`) generates a `.env` file with all secrets on the server:
 ```yaml
@@ -47,20 +36,9 @@ This file is readable by anyone with SSH access to the server.
 
 ---
 
-## 3. wp-data legacy cPanel data
+## 3. wp-data legacy cPanel data ✅ DONE (2026-07-18)
 
-**Severity:** 🟡 Medium
-
-The folder contains:
-- `shadow` — Linux password hash (SHA-512 crypt)
-- `proftpdpasswd` — FTP accounts with hashed passwords
-- `cbs_v5_dump.sql` — complete MySQL database dump
-
-**Actions:**
-- [ ] Delete the entire `wp-data/` folder from the development machine
-- [ ] If data is needed for archive, store it on an encrypted drive outside the development environment
-- [ ] Change all passwords ever associated with these cPanel accounts
-- [ ] Check if `cbs_v5_dump.sql` contains personal data subject to GDPR
+Folder deleted from development machine.
 
 ---
 
