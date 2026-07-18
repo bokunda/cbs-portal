@@ -82,7 +82,7 @@ node index.js all-pubs      # runs full migration pipeline
 | Strapi Admin Usage | `cbs-portal-strapi-be/docs/backend-strapi-usage.md` |
 | Strapi Schema | `cbs-portal-strapi-be/docs/backend-schema.md` |
 | Component Catalog | `cbs-portal-ui/docs/frontend-components.md` |
-| HubSpot Service | `hubspot-cbs-deal-exporter/docs/confluence/` |
+| HubSpot Service | `cbs-integration-service/docs/confluence/` |
 
 ### 🔄 Data & Migrations
 | Topic | File |

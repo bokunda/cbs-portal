@@ -2,7 +2,7 @@
 cbs-portal-ui/
 cbs-portal-strapi-be/
 terraform/
-hubspot-cbs-deal-exporter/
+cbs-integration-service/
 
 # Large data & legacy
 wp-data/
