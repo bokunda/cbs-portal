@@ -74,20 +74,13 @@ Added `mapbox-access-token` data source to `secretmanager.tf`.
 
 ---
 
-## 5. Add Cloud Monitoring alerts 🟡 TODO (GCP Console, not code)
+## 5. Add Cloud Monitoring alerts ✅ DONE (2026-07-18)
 
-**Severity:** 🟡 Medium
-
-No monitoring alerts are configured for security events.
-
-**Actions:**
-- [ ] Create Cloud Monitoring alert for HTTP 401/403 spikes on integration service
-  - GCP Console → Monitoring → Alerting → Create Policy
-  - Metric: Cloud Run → Request Count → filter by response_code_class="4xx" on `cbs-hubspot-uat`
-  - Condition: > 10 errors in 5 minutes → notify
-- [ ] Create Cloud Audit Logs alert for Secret Manager access anomalies
-- [ ] Add Cloud Run uptime check for `/health` endpoints on all services
-- [ ] Consider using GCP Security Command Center (free tier available)
+Deployed as Terraform IaC (`monitoring.tf`):
+- Uptime checks every 5 min for all 3 Cloud Run services
+- Alert on >10 4xx errors in 5 min on integration service
+- Alert on 0 running Cloud Run instances for 5 min
+- Email notifications to bpiskulic1996@gmail.com
 
 ---
 
